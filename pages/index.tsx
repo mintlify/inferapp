@@ -1,21 +1,16 @@
 import { useState } from 'react';
 import Link from 'next/link';
-import { Disclosure, Menu } from '@headlessui/react';
+import { Disclosure } from '@headlessui/react';
 import {
   MenuIcon,
   XIcon,
   MailIcon,
 } from '@heroicons/react/outline';
+import axios from 'axios';
 import CodeEditor from '../components/CodeEditor';
 import Output from '../components/Output';
+import { LanguagePrediction } from './api/detect';
 
-const user = {
-  name: 'Debbie Lewis',
-  handle: 'deblewis',
-  email: 'debbielewis@example.com',
-  imageUrl:
-    'https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=320&h=320&q=80',
-}
 const navigation = [
   { name: 'Home', href: '#', current: true },
   { name: 'Documentation', href: '#', current: false },
@@ -76,6 +71,19 @@ export default function Example() {
   const [outputDisplay, setOutputDisplay] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const codeOnChange = async (newCode: string) => {
+    setCode(newCode);
+
+    if (newCode.length < 50) {
+      setOutputDisplay("More code is required to detect");
+    } else {
+      const detectedResponse = await axios.post('/api/detect', { code: newCode });
+      const detected = detectedResponse.data as LanguagePrediction
+      const detectedLanguage = detected.language || '';
+      setOutputDisplay(detectedLanguage);
+    }
+  }
+
   return (
     <div>
       <Disclosure as="div" className="relative bg-sky-700 pb-32 overflow-hidden">
@@ -125,20 +133,6 @@ export default function Example() {
                       )}
                     </Disclosure.Button>
                   </div>
-                  <div className="hidden lg:block lg:ml-4">
-                    <div className="flex items-center">
-
-                      {/* Profile dropdown */}
-                      <Menu as="div" className="relative flex-shrink-0 ml-4">
-                        <div>
-                          <Menu.Button className="rounded-full flex text-sm text-white">
-                            <span className="sr-only">Open user menu</span>
-                            <img className="rounded-full h-8 w-8" src={user.imageUrl} alt="" />
-                          </Menu.Button>
-                        </div>
-                      </Menu>
-                    </div>
-                  </div>
                 </div>
               </div>
 
@@ -156,23 +150,6 @@ export default function Example() {
                       {item.name}
                     </a>
                   ))}
-                </div>
-                <div className="pt-4 pb-3 border-t border-sky-800">
-                  <div className="flex items-center px-4">
-                    <div className="flex-shrink-0">
-                      <img className="rounded-full h-10 w-10" src={user.imageUrl} alt="" />
-                    </div>
-                    <div className="ml-3">
-                      <div className="text-base font-medium text-white">{user.name}</div>
-                      <div className="text-sm font-medium text-sky-200">{user.email}</div>
-                    </div>
-                    <button
-                      type="button"
-                      className="ml-auto flex-shrink-0 rounded-full p-1 text-sky-200 hover:bg-sky-800 hover:text-white"
-                    >
-                      <span className="sr-only">View notifications</span>
-                    </button>
-                  </div>
                 </div>
               </Disclosure.Panel>
             </nav>
@@ -218,9 +195,9 @@ export default function Example() {
             <div className="h-full">
               <CodeEditor
                 code={code}
-                setCode={setCode}
-                placeholder="Enter Code"
-                language="Javascript"
+                setCode={codeOnChange}
+                placeholder="Type or paste code here"
+                language={outputDisplay}
               />
             </div>
             <div className="h-full mt-4 sm:m-0">
@@ -256,7 +233,7 @@ export default function Example() {
             </Link>
           ))}
         </div>
-        <p className="mt-8 text-center text-base text-gray-400">&copy; 2021 Figstack, Inc. All rights reserved.</p>
+        <p className="mt-8 text-center text-base text-gray-400">&copy; 2021 Figstack, Inc. Powered by GuessLang.</p>
       </div>
     </footer>
     </div>

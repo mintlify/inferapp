@@ -1,0 +1,2 @@
+# inferapp
+Website for inferlang

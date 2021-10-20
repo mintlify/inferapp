@@ -3,7 +3,7 @@ import { DuplicateIcon } from '@heroicons/react/outline';
 
 type OutputProps = {
   output: string;
-  isLoading?: boolean;
+  isLoading: boolean;
 }
 
 function Output(props: OutputProps) {

@@ -15,7 +15,7 @@ const navigation = [
   { name: 'Home', href: '#', current: true },
   { name: 'Documentation', href: '#', current: false },
   { name: 'Community', href: '#', current: false },
-]
+];
 
 const footer = {
   main: [
@@ -63,26 +63,25 @@ const footer = {
 };
 
 function classNames(...classes: any) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(' ');
 }
 
 export default function Example() {
   const [code, setCode] = useState('');
   const [outputDisplay, setOutputDisplay] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const codeOnChange = async (newCode: string) => {
     setCode(newCode);
 
-    if (newCode.length < 50) {
-      setOutputDisplay("More code is required to detect");
+    if (newCode.length < 40) {
+      setOutputDisplay('More code is required to detect');
     } else {
       const detectedResponse = await axios.post('/api/detect', { code: newCode });
-      const detected = detectedResponse.data as LanguagePrediction
+      const detected = detectedResponse.data as LanguagePrediction;
       const detectedLanguage = detected.language || '';
       setOutputDisplay(detectedLanguage);
     }
-  }
+  };
 
   return (
     <div>
@@ -92,7 +91,7 @@ export default function Example() {
             <nav
               className={classNames(
                 open ? 'bg-sky-900' : 'bg-transparent',
-                'relative z-10 border-b border-teal-500 border-opacity-25 lg:bg-transparent lg:border-none'
+                'relative z-10 border-b border-teal-500 border-opacity-25 lg:bg-transparent lg:border-none',
               )}
             >
               <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
@@ -113,7 +112,7 @@ export default function Example() {
                             href={item.href}
                             className={classNames(
                               item.current ? 'bg-black bg-opacity-25' : 'hover:bg-sky-800',
-                              'rounded-md py-2 px-3 text-sm font-medium text-white'
+                              'rounded-md py-2 px-3 text-sm font-medium text-white',
                             )}
                           >
                             {item.name}
@@ -144,7 +143,7 @@ export default function Example() {
                       href={item.href}
                       className={classNames(
                         item.current ? 'bg-black bg-opacity-25' : 'hover:bg-sky-800',
-                        'block rounded-md py-2 px-3 text-base font-medium text-white'
+                        'block rounded-md py-2 px-3 text-base font-medium text-white',
                       )}
                     >
                       {item.name}
@@ -157,7 +156,7 @@ export default function Example() {
               aria-hidden="true"
               className={classNames(
                 open ? 'bottom-0' : 'inset-y-0',
-                'absolute inset-x-0 left-1/2 transform -translate-x-1/2 w-full overflow-hidden lg:inset-y-0'
+                'absolute inset-x-0 left-1/2 transform -translate-x-1/2 w-full overflow-hidden lg:inset-y-0',
               )}
             >
               <div className="absolute inset-0 flex">
@@ -191,51 +190,51 @@ export default function Example() {
       <main className="relative -mt-32">
         <div className="max-w-screen-xl mx-auto pb-6 px-4 sm:px-6 lg:pb-16 lg:px-8">
           <div className="rounded-lg overflow-hidden">
-          <div className="grid sm:grid-cols-2 sm:gap-4">
-            <div className="h-full">
-              <CodeEditor
-                code={code}
-                setCode={codeOnChange}
-                placeholder="Type or paste code here"
-                language={outputDisplay}
-              />
+            <div className="grid sm:grid-cols-2 sm:gap-4">
+              <div className="h-full">
+                <CodeEditor
+                  code={code}
+                  setCode={codeOnChange}
+                  placeholder="Type or paste code here"
+                  language={outputDisplay}
+                />
+              </div>
+              <div className="h-full mt-4 sm:m-0">
+                <Output
+                  output={outputDisplay}
+                  isLoading={false}
+                />
+              </div>
             </div>
-            <div className="h-full mt-4 sm:m-0">
-              <Output
-                output={outputDisplay}
-                isLoading={isSubmitting}
-              />
-            </div>
-          </div>
           </div>
         </div>
       </main>
       <footer className="relative z-10 bg-white">
-      <div className="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
-        <nav className="-mx-5 -my-2 flex flex-wrap justify-center" aria-label="Footer">
-          {footer.main.map((item) => (
-            <div key={item.name} className="px-5 py-2">
+        <div className="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
+          <nav className="-mx-5 -my-2 flex flex-wrap justify-center" aria-label="Footer">
+            {footer.main.map((item) => (
+              <div key={item.name} className="px-5 py-2">
+                <Link key={item.name} href={item.href} passHref>
+                  <button type="button" className="text-base text-gray-500 hover:text-gray-900">
+                    {item.name}
+                  </button>
+                </Link>
+              </div>
+            ))}
+          </nav>
+          <div className="mt-8 flex justify-center space-x-6">
+            {footer.social.map((item) => (
               <Link key={item.name} href={item.href} passHref>
-                <button type="button" className="text-base text-gray-500 hover:text-gray-900">
-                  {item.name}
+                <button type="button" className="text-gray-400 hover:text-gray-500">
+                  <span className="sr-only">{item.name}</span>
+                  <item.icon className="h-6 w-6" aria-hidden="true" />
                 </button>
               </Link>
-            </div>
-          ))}
-        </nav>
-        <div className="mt-8 flex justify-center space-x-6">
-          {footer.social.map((item) => (
-            <Link key={item.name} href={item.href} passHref>
-              <button type="button" className="text-gray-400 hover:text-gray-500">
-                <span className="sr-only">{item.name}</span>
-                <item.icon className="h-6 w-6" aria-hidden="true" />
-              </button>
-            </Link>
-          ))}
+            ))}
+          </div>
+          <p className="mt-8 text-center text-base text-gray-400">&copy; 2021 Figstack, Inc. Powered by GuessLang.</p>
         </div>
-        <p className="mt-8 text-center text-base text-gray-400">&copy; 2021 Figstack, Inc. Powered by GuessLang.</p>
-      </div>
-    </footer>
+      </footer>
     </div>
-  )
+  );
 }

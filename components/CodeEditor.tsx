@@ -9,11 +9,10 @@ type CodeEditorProps = {
   setCode: (code: string) => void;
   placeholder: string;
   language: string;
-  disabled?: boolean;
 }
 
 export default function CodeEditor({
-  code, setCode, placeholder, language, disabled,
+  code, setCode, placeholder, language,
 }: CodeEditorProps) {
   const highlight = (codeUnhighlighted: string) => (
     <Highlight
@@ -40,7 +39,6 @@ export default function CodeEditor({
     <Editor
       value={code}
       onValueChange={(codeUpdated) => setCode(codeUpdated)}
-      disabled={disabled}
       highlight={highlight}
       padding={16}
       placeholder={placeholder}

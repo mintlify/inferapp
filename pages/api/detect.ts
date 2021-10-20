@@ -8,11 +8,11 @@ export type LanguagePrediction = {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<LanguagePrediction>
+  res: NextApiResponse<LanguagePrediction>,
 ) {
   const { code } = req.body;
   const guessLangResponse = await axios.post('https://figstack.uc.r.appspot.com/infer', {
-    code: code || ''
+    code: code || '',
   });
 
   const guessLang = guessLangResponse.data as LanguagePrediction;

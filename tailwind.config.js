@@ -1,13 +1,11 @@
-const colors = require('tailwindcss/colors');
-
 module.exports = {
   purge: [],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
       colors: {
-        sky: colors.sky,
-        teal: colors.teal,
+        primary: '#0c8c5e',
+        secondary: '#18e299',
       },
     },
   },
@@ -15,4 +13,4 @@ module.exports = {
     extend: {},
   },
   plugins: [],
-}
+};

@@ -1,4 +1,4 @@
-![Tux, the Linux mascot](/assets/mintlify.svg)
+![Tux, the Linux mascot](/assets/mintlify-green-smol.png)
 # Inferlang for Developers
 
 Auto-detect the programming language of any code

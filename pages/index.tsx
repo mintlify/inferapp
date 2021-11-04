@@ -13,19 +13,19 @@ import Output from '../components/Output';
 import { LanguagePrediction } from './api/detect';
 
 const navigation = [
-  { name: 'Documentation', href: '#', current: false },
-  { name: 'Code Search', href: '#', current: false },
+  { name: 'Documentation', href: 'https://nicedoc.io/mintlify/inferapp', current: false },
+  { name: 'Code Search', href: 'https://www.mintlify.com/', current: false },
 ];
 
 const footer = {
   main: [
-    { name: 'Documentation', href: 'https://marketplace.visualstudio.com/items?itemName=figstack.vsc' },
+    { name: 'Documentation', href: 'https://nicedoc.io/mintlify/inferapp' },
     { name: 'Code Search', href: 'https://www.mintlify.com/' },
   ],
   social: [
     {
       name: 'Contact Us',
-      href: 'mailto:hi@figstack.com',
+      href: 'mailto:hi@mintlify.com',
       icon: function email(props: any) {
         return (
           <MailIcon className="h-6 w-6" {...props} />
@@ -45,7 +45,7 @@ const footer = {
     },
     {
       name: 'GitHub',
-      href: 'https://github.com/figstack',
+      href: 'https://github.com/mintlify',
       icon: function github(props: any) {
         return (
           <svg fill="currentColor" viewBox="0 0 24 24" {...props}>

@@ -191,6 +191,10 @@ export default function Example() {
 
       <Head>
         <title>Inferlang - Detect any programming language</title>
+        <meta
+          name="description"
+          content="Inferlang can detect the programming language of a given source code. Powered by Guesslang and hosted by Mintlify, it supports more than 50 programming with 90+% accuracy"
+        />
       </Head>
 
       <main className="relative -mt-32">

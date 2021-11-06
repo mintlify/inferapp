@@ -34,7 +34,7 @@ const footer = {
     },
     {
       name: 'Twitter',
-      href: 'https://twitter.com/FigstackApp',
+      href: 'https://twitter.com/mintlify',
       icon: function twitter(props: any) {
         return (
           <svg fill="currentColor" viewBox="0 0 24 24" {...props}>

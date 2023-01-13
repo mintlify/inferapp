@@ -1,42 +1,42 @@
-import { useState } from "react";
-import Head from "next/head";
-import Link from "next/link";
-import { Disclosure } from "@headlessui/react";
-import { MenuIcon, XIcon, MailIcon } from "@heroicons/react/outline";
-import axios from "axios";
-import CodeEditor from "../components/CodeEditor";
-import Output from "../components/Output";
-import { LanguagePrediction } from "./api/detect";
+import { useState } from 'react';
+import Head from 'next/head';
+import Link from 'next/link';
+import { Disclosure } from '@headlessui/react';
+import { MenuIcon, XIcon, MailIcon } from '@heroicons/react/outline';
+import axios from 'axios';
+import CodeEditor from '../components/CodeEditor';
+import Output from '../components/Output';
+import { LanguagePrediction } from './api/detect';
 
 const navigation = [
   {
-    name: "Inferlang Docs",
-    href: "https://nicedoc.io/mintlify/inferapp",
+    name: 'Inferlang Docs',
+    href: 'https://nicedoc.io/mintlify/inferapp',
     current: false,
   },
   {
-    name: "Documentation Platform",
-    href: "https://www.mintlify.com/",
+    name: 'Documentation Platform',
+    href: 'https://www.mintlify.com/',
     current: false,
   },
 ];
 
 const footer = {
   main: [
-    { name: "Inferlang Docs", href: "https://nicedoc.io/mintlify/inferapp" },
-    { name: "Documentation Platform", href: "https://www.mintlify.com/" },
+    { name: 'Inferlang Docs', href: 'https://nicedoc.io/mintlify/inferapp' },
+    { name: 'Documentation Platform', href: 'https://www.mintlify.com/' },
   ],
   social: [
     {
-      name: "Contact Us",
-      href: "mailto:hi@mintlify.com",
+      name: 'Contact Us',
+      href: 'mailto:hi@mintlify.com',
       icon: function email(props: any) {
         return <MailIcon className="h-6 w-6" {...props} />;
       },
     },
     {
-      name: "Twitter",
-      href: "https://twitter.com/mintlify",
+      name: 'Twitter',
+      href: 'https://twitter.com/mintlify',
       icon: function twitter(props: any) {
         return (
           <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
@@ -46,8 +46,8 @@ const footer = {
       },
     },
     {
-      name: "GitHub",
-      href: "https://github.com/mintlify",
+      name: 'GitHub',
+      href: 'https://github.com/mintlify',
       icon: function github(props: any) {
         return (
           <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
@@ -64,26 +64,26 @@ const footer = {
 };
 
 function classNames(...classes: any) {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(' ');
 }
 
 export default function Example() {
-  const [code, setCode] = useState("");
-  const [outputDisplay, setOutputDisplay] = useState("");
+  const [code, setCode] = useState('');
+  const [outputDisplay, setOutputDisplay] = useState('');
 
   const codeOnChange = async (newCode: string) => {
     setCode(newCode);
 
     if (newCode.length < 40) {
       setOutputDisplay(
-        `You need to add another ${40 - newCode.length} characters to detect`
+        `You need to add another ${40 - newCode.length} characters to detect`,
       );
     } else {
-      const detectedResponse = await axios.post("/api/detect", {
+      const detectedResponse = await axios.post('/api/detect', {
         code: newCode,
       });
       const detected = detectedResponse.data as LanguagePrediction;
-      const detectedLanguage = detected.language || "";
+      const detectedLanguage = detected.language || '';
       setOutputDisplay(detectedLanguage);
     }
   };
@@ -95,8 +95,8 @@ export default function Example() {
           <>
             <nav
               className={classNames(
-                open ? "bg-sky-900" : "bg-transparent",
-                "relative z-10 border-b border-teal-500 border-opacity-25 lg:bg-transparent lg:border-none"
+                open ? 'bg-sky-900' : 'bg-transparent',
+                'relative z-10 border-b border-teal-500 border-opacity-25 lg:bg-transparent lg:border-none',
               )}
             >
               <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
@@ -135,9 +135,9 @@ export default function Example() {
                             href={item.href}
                             className={classNames(
                               item.current
-                                ? "bg-black bg-opacity-25"
-                                : "hover:bg-opacity-25 hover:bg-black",
-                              "mr-2 rounded-md py-2 px-3 text-sm font-medium text-white"
+                                ? 'bg-black bg-opacity-25'
+                                : 'hover:bg-opacity-25 hover:bg-black',
+                              'mr-2 rounded-md py-2 px-3 text-sm font-medium text-white',
                             )}
                           >
                             {item.name}
@@ -174,9 +174,9 @@ export default function Example() {
                       href={item.href}
                       className={classNames(
                         item.current
-                          ? "bg-black bg-opacity-25"
-                          : "hover:bg-sky-800",
-                        "block rounded-md py-2 px-3 text-base font-medium text-white"
+                          ? 'bg-black bg-opacity-25'
+                          : 'hover:bg-sky-800',
+                        'block rounded-md py-2 px-3 text-base font-medium text-white',
                       )}
                     >
                       {item.name}
@@ -188,8 +188,8 @@ export default function Example() {
             <div
               aria-hidden="true"
               className={classNames(
-                open ? "bottom-0" : "inset-y-0",
-                "absolute inset-x-0 left-1/2 transform -translate-x-1/2 w-full overflow-hidden lg:inset-y-0"
+                open ? 'bottom-0' : 'inset-y-0',
+                'absolute inset-x-0 left-1/2 transform -translate-x-1/2 w-full overflow-hidden lg:inset-y-0',
               )}
             >
               <div className="absolute inset-0 flex">

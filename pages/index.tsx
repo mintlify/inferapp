@@ -2,34 +2,36 @@ import { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { Disclosure } from '@headlessui/react';
-import {
-  MenuIcon,
-  XIcon,
-  MailIcon,
-} from '@heroicons/react/outline';
+import { MenuIcon, XIcon, MailIcon } from '@heroicons/react/outline';
 import axios from 'axios';
 import CodeEditor from '../components/CodeEditor';
 import Output from '../components/Output';
 import { LanguagePrediction } from './api/detect';
 
 const navigation = [
-  { name: 'Documentation', href: 'https://nicedoc.io/mintlify/inferapp', current: false },
-  { name: 'Code Search', href: 'https://www.mintlify.com/', current: false },
+  {
+    name: 'Inferlang Docs',
+    href: 'https://nicedoc.io/mintlify/inferapp',
+    current: false,
+  },
+  {
+    name: 'Documentation Platform',
+    href: 'https://www.mintlify.com/',
+    current: false,
+  },
 ];
 
 const footer = {
   main: [
-    { name: 'Documentation', href: 'https://nicedoc.io/mintlify/inferapp' },
-    { name: 'Code Search', href: 'https://www.mintlify.com/' },
+    { name: 'Inferlang Docs', href: 'https://nicedoc.io/mintlify/inferapp' },
+    { name: 'Documentation Platform', href: 'https://www.mintlify.com/' },
   ],
   social: [
     {
       name: 'Contact Us',
       href: 'mailto:hi@mintlify.com',
       icon: function email(props: any) {
-        return (
-          <MailIcon className="h-6 w-6" {...props} />
-        );
+        return <MailIcon className="h-6 w-6" {...props} />;
       },
     },
     {
@@ -73,9 +75,13 @@ export default function Example() {
     setCode(newCode);
 
     if (newCode.length < 40) {
-      setOutputDisplay(`You need to add another ${40 - newCode.length} characters to detect`);
+      setOutputDisplay(
+        `You need to add another ${40 - newCode.length} characters to detect`,
+      );
     } else {
-      const detectedResponse = await axios.post('/api/detect', { code: newCode });
+      const detectedResponse = await axios.post('/api/detect', {
+        code: newCode,
+      });
       const detected = detectedResponse.data as LanguagePrediction;
       const detectedLanguage = detected.language || '';
       setOutputDisplay(detectedLanguage);
@@ -98,10 +104,26 @@ export default function Example() {
                   <div className="px-2 flex items-center lg:px-0">
                     <div className="flex-shrink-0">
                       <div className="h-7 w-7">
-                        <svg viewBox="0 0 141 141" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M18.4672 54.6072L34.4379 38.5328C33.5494 42.6428 32.858 46.9378 32.858 51.3214C32.858 57.7465 33.8393 64.3183 36.3867 70.4808C37.7727 74.4164 39.6401 78.3944 42.1274 82.1519L10.8786 113.401C9.19813 110.656 7.8153 107.841 6.82735 104.877L6.81229 104.832L6.79617 104.787C4.87361 99.4465 4.00367 93.8575 4.00001 88.2151C4.21919 76.4045 8.54284 64.6897 17.2843 55.788H17.2941L18.4672 54.6072Z" stroke="white" strokeWidth="8" />
-                          <path d="M26.9728 129.593L58.1003 98.2659C61.7071 100.625 65.5846 102.667 69.8386 104.09C76.1369 106.351 82.6506 107.343 89.1113 107.343C93.4212 107.343 97.7931 106.884 102.2 105.721L86.0496 121.976L86.0404 121.985L85.583 122.443C76.3521 131.674 64.3186 136.21 52.2175 136.434C46.5752 136.43 40.9862 135.56 35.6458 133.638L35.6291 133.632L35.6123 133.626C32.6572 132.592 29.7356 131.267 26.9728 129.593Z" stroke="white" strokeWidth="8" />
-                          <path d="M84.9806 44.1555L84.9517 44.1339L84.9225 44.1128C80.5289 40.9396 75.7466 38.1463 70.3607 36.3443C64.0624 34.0833 57.5487 33.0913 51.088 33.0913C48.8828 33.0913 46.6614 33.2115 44.4274 33.4846C46.6642 28.0962 50.0095 22.9946 54.4083 18.4328L54.8495 17.9915C64.1038 8.73728 76.3716 4 88.6458 4L110.107 4L136.434 4V30.3262V51.7878C136.434 64.0305 131.717 76.0876 122.42 85.6063C122.366 85.6611 122.315 85.7153 122.267 85.7685L122.026 86.0014C117.432 90.4366 112.29 93.8028 106.858 96.0437C107.158 93.8433 107.342 91.6063 107.342 89.3456C107.342 82.8754 106.347 76.3522 104.079 70.0453C102.335 65.0655 99.8209 60.0145 96.2571 55.4251C94.7351 53.3988 92.9816 51.3998 91.0077 49.4259C89.0247 47.4429 87.0164 45.6824 84.9806 44.1555Z" stroke="white" strokeWidth="8" />
+                        <svg
+                          viewBox="0 0 141 141"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M18.4672 54.6072L34.4379 38.5328C33.5494 42.6428 32.858 46.9378 32.858 51.3214C32.858 57.7465 33.8393 64.3183 36.3867 70.4808C37.7727 74.4164 39.6401 78.3944 42.1274 82.1519L10.8786 113.401C9.19813 110.656 7.8153 107.841 6.82735 104.877L6.81229 104.832L6.79617 104.787C4.87361 99.4465 4.00367 93.8575 4.00001 88.2151C4.21919 76.4045 8.54284 64.6897 17.2843 55.788H17.2941L18.4672 54.6072Z"
+                            stroke="white"
+                            strokeWidth="8"
+                          />
+                          <path
+                            d="M26.9728 129.593L58.1003 98.2659C61.7071 100.625 65.5846 102.667 69.8386 104.09C76.1369 106.351 82.6506 107.343 89.1113 107.343C93.4212 107.343 97.7931 106.884 102.2 105.721L86.0496 121.976L86.0404 121.985L85.583 122.443C76.3521 131.674 64.3186 136.21 52.2175 136.434C46.5752 136.43 40.9862 135.56 35.6458 133.638L35.6291 133.632L35.6123 133.626C32.6572 132.592 29.7356 131.267 26.9728 129.593Z"
+                            stroke="white"
+                            strokeWidth="8"
+                          />
+                          <path
+                            d="M84.9806 44.1555L84.9517 44.1339L84.9225 44.1128C80.5289 40.9396 75.7466 38.1463 70.3607 36.3443C64.0624 34.0833 57.5487 33.0913 51.088 33.0913C48.8828 33.0913 46.6614 33.2115 44.4274 33.4846C46.6642 28.0962 50.0095 22.9946 54.4083 18.4328L54.8495 17.9915C64.1038 8.73728 76.3716 4 88.6458 4L110.107 4L136.434 4V30.3262V51.7878C136.434 64.0305 131.717 76.0876 122.42 85.6063C122.366 85.6611 122.315 85.7153 122.267 85.7685L122.026 86.0014C117.432 90.4366 112.29 93.8028 106.858 96.0437C107.158 93.8433 107.342 91.6063 107.342 89.3456C107.342 82.8754 106.347 76.3522 104.079 70.0453C102.335 65.0655 99.8209 60.0145 96.2571 55.4251C94.7351 53.3988 92.9816 51.3998 91.0077 49.4259C89.0247 47.4429 87.0164 45.6824 84.9806 44.1555Z"
+                            stroke="white"
+                            strokeWidth="8"
+                          />
                         </svg>
                       </div>
                     </div>
@@ -112,7 +134,9 @@ export default function Example() {
                             key={item.name}
                             href={item.href}
                             className={classNames(
-                              item.current ? 'bg-black bg-opacity-25' : 'hover:bg-opacity-25 hover:bg-black',
+                              item.current
+                                ? 'bg-black bg-opacity-25'
+                                : 'hover:bg-opacity-25 hover:bg-black',
                               'mr-2 rounded-md py-2 px-3 text-sm font-medium text-white',
                             )}
                           >
@@ -127,9 +151,15 @@ export default function Example() {
                     <Disclosure.Button className="p-2 rounded-md inline-flex items-center justify-center text-sky-200 hover:text-white hover:bg-sky-800">
                       <span className="sr-only">Open main menu</span>
                       {open ? (
-                        <XIcon className="block flex-shrink-0 h-6 w-6" aria-hidden="true" />
+                        <XIcon
+                          className="block flex-shrink-0 h-6 w-6"
+                          aria-hidden="true"
+                        />
                       ) : (
-                        <MenuIcon className="block flex-shrink-0 h-6 w-6" aria-hidden="true" />
+                        <MenuIcon
+                          className="block flex-shrink-0 h-6 w-6"
+                          aria-hidden="true"
+                        />
                       )}
                     </Disclosure.Button>
                   </div>
@@ -143,7 +173,9 @@ export default function Example() {
                       key={item.name}
                       href={item.href}
                       className={classNames(
-                        item.current ? 'bg-black bg-opacity-25' : 'hover:bg-sky-800',
+                        item.current
+                          ? 'bg-black bg-opacity-25'
+                          : 'hover:bg-sky-800',
                         'block rounded-md py-2 px-3 text-base font-medium text-white',
                       )}
                     >
@@ -172,17 +204,33 @@ export default function Example() {
                   viewBox="0 0 1750 308"
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  <path d="M284.161 308H1465.84L875.001 182.413 284.161 308z" fill="#18e299" />
-                  <path d="M1465.84 308L16.816 0H1750v308h-284.16z" fill="#18e299" />
-                  <path d="M1733.19 0L284.161 308H0V0h1733.19z" fill="#0c8c5e" />
-                  <path d="M875.001 182.413L1733.19 0H16.816l858.185 182.413z" fill="#0c8c5e" />
+                  <path
+                    d="M284.161 308H1465.84L875.001 182.413 284.161 308z"
+                    fill="#18e299"
+                  />
+                  <path
+                    d="M1465.84 308L16.816 0H1750v308h-284.16z"
+                    fill="#18e299"
+                  />
+                  <path
+                    d="M1733.19 0L284.161 308H0V0h1733.19z"
+                    fill="#0c8c5e"
+                  />
+                  <path
+                    d="M875.001 182.413L1733.19 0H16.816l858.185 182.413z"
+                    fill="#0c8c5e"
+                  />
                 </svg>
               </div>
             </div>
             <header className="relative py-8">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h1 className="text-2xl font-bold text-white">Detect any programming language</h1>
-                <p className="mt-1 text-gray-300">Add some code to get started</p>
+                <h1 className="text-2xl font-bold text-white">
+                  Detect any programming language
+                </h1>
+                <p className="mt-1 text-gray-300">
+                  Add some code to get started
+                </p>
               </div>
             </header>
           </>
@@ -210,10 +258,7 @@ export default function Example() {
                 />
               </div>
               <div className="h-full mt-4 sm:m-0">
-                <Output
-                  output={outputDisplay}
-                  isLoading={false}
-                />
+                <Output output={outputDisplay} isLoading={false} />
               </div>
             </div>
           </div>
@@ -221,11 +266,17 @@ export default function Example() {
       </main>
       <footer className="relative z-10 bg-white">
         <div className="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
-          <nav className="-mx-5 -my-2 flex flex-wrap justify-center" aria-label="Footer">
+          <nav
+            className="-mx-5 -my-2 flex flex-wrap justify-center"
+            aria-label="Footer"
+          >
             {footer.main.map((item) => (
               <div key={item.name} className="px-5 py-2">
                 <Link key={item.name} href={item.href} passHref>
-                  <button type="button" className="text-base text-gray-500 hover:text-gray-900">
+                  <button
+                    type="button"
+                    className="text-base text-gray-500 hover:text-gray-900"
+                  >
                     {item.name}
                   </button>
                 </Link>
@@ -235,14 +286,23 @@ export default function Example() {
           <div className="mt-8 flex justify-center space-x-6">
             {footer.social.map((item) => (
               <Link key={item.name} href={item.href} passHref>
-                <button type="button" className="text-gray-400 hover:text-gray-500">
+                <button
+                  type="button"
+                  className="text-gray-400 hover:text-gray-500"
+                >
                   <span className="sr-only">{item.name}</span>
                   <item.icon className="h-6 w-6" aria-hidden="true" />
                 </button>
               </Link>
             ))}
           </div>
-          <p className="mt-8 text-center text-base text-gray-400">&copy; 2021 Mintlify, Inc. Powered by GuessLang.</p>
+          <p className="mt-8 text-center text-base text-gray-400">
+            &copy;
+            {' '}
+            {new Date().getFullYear()}
+            {' '}
+            Mintlify, Inc. Powered by GuessLang.
+          </p>
         </div>
       </footer>
     </div>

@@ -1,7 +1,9 @@
 ![Tux, the Linux mascot](/assets/mintlify-green-smol.png)
+
 # Inferlang for Developers
 
 Auto-detect the programming language of any code
+
 ## API Endpoint
 
 Use the Inferlang API to programmatically build language detection into your application
@@ -10,13 +12,13 @@ Use the Inferlang API to programmatically build language detection into your app
 POST: https://inferlang.com/api/detect
 ```
 
-| Request Body | |
-| ----------- | ----------- |
-| `code` (required)   | Code input you would like to identify the language for as a string |
+| Request Body      |                                                                    |
+| ----------------- | ------------------------------------------------------------------ |
+| `code` (required) | Code input you would like to identify the language for as a string |
 
-| Returns | |
-| ----------- | ----------- |
-| `language`     | Name of the language detected |
+| Returns    |                               |
+| ---------- | ----------------------------- |
+| `language` | Name of the language detected |
 
 ## Running locally
 
@@ -42,6 +44,6 @@ Inferlang is powered by and [GuessLang](https://github.com/yoeo/guesslang) and h
 
 - [GuessLang Documentation](https://guesslang.readthedocs.io/en/latest/) - Guesslang detects the programming language of a given source code. It supports more than 50 programming languages and detects the correct programming language with more than 90% accuracy.
 
-- [Mintlify Signup](https://nextjs.org/learn) - The search engine in your codebase
+- [Mintlify Signup](https://mintlify.com) - Our Documentation Platform
 
 You can check out [the Inferlang repository](https://github.com/mintlify/inferapp) - your feedback and contributions are welcome!
